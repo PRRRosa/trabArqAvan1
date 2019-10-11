@@ -6,8 +6,18 @@
 
 void multiplica(int m, int n, int **matA, int **matB, int **matC){
 	int i, j, k, som;
-	/*for(j=0;j<n;j++){
-		for (i=0;i<m;i++){*/
+
+	//codigo original
+	for(i=0;i<m;i++){
+		for(j=0;j<n;j++){
+			for(k=0;k<m;k++){
+				matC[i][j] += matA[i][k]*matB[k][j];
+			}		
+		}
+	}
+
+	/*
+	//loop unrolling
 	for (i=0;i<m;i+=10){
 		for(j=0;j<n;j+=10){
 			for(k=0; k<m; k+=10){
@@ -23,7 +33,7 @@ void multiplica(int m, int n, int **matA, int **matB, int **matC){
 				matC[i+9][j+9]+= matA[i+9][k+9]*matB[k+9][j+9];
 			}
 		}
-	}
+	}*/
 }
 
 int **aloca(int m, int n, int **matriz){
