@@ -7,15 +7,24 @@
 void multiplica(int m, int n, int **matA, int **matB, int **matC){
 	int i, j, k, som;
 
-
-	for(i=0;i<m;i++){
-		for(j=0;j<n;j++){
-			for(k=0;k<m;k++){
-				matC[i][j] += matA[i][k]*matB[k][j];
-			}		
+	
+	//loop unrolling
+	for (i=0;i<m;i+=10){
+		for(j=0;j<n;j+=10){
+			for(k=0; k<m; k+=10){
+				matC[i][j]+= matA[i][k]*matB[k][j];
+				matC[i+1][j+1]+= matA[i+1][k+1]*matB[k+1][j+1];
+				matC[i+2][j+2]+= matA[i+2][k+2]*matB[k+2][j+2];
+				matC[i+3][j+3]+= matA[i+3][k+3]*matB[k+3][j+3];
+				matC[i+4][j+4]+= matA[i+4][k+4]*matB[k+4][j+4];
+				matC[i+5][j+5]+= matA[i+5][k+5]*matB[k+5][j+5];
+				matC[i+6][j+6]+= matA[i+6][k+6]*matB[k+6][j+6];
+				matC[i+7][j+7]+= matA[i+7][k+7]*matB[k+7][j+7];
+				matC[i+8][j+8]+= matA[i+8][k+8]*matB[k+8][j+8];
+				matC[i+9][j+9]+= matA[i+9][k+9]*matB[k+9][j+9];
+			}
 		}
 	}
-
 }
 
 int **aloca(int m, int n, int **matriz){
