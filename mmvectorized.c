@@ -13,8 +13,8 @@ void multiplica(int m, int n, float *matA, float *matB, float matC[m][n]){
          for (int j = 0; j < n; j++) {
              for (int k = 0; k < m; k += 4) {
                  // load
-                 va = _mm_loadu_ps(matA+(i*1024)+k); // matrix_a[i][k]
-                 vb = _mm_loadu_ps(matB+(j*1024)+k); // matrix_b[j][k]
+                 va = _mm_loadu_ps(matA+(i*m)+k); // matrix_a[i][k]
+                 vb = _mm_loadu_ps(matB+(j*n)+k); // matrix_b[j][k]
 
                  // multiply
                  vresult = _mm_mul_ps(va, vb);
