@@ -75,80 +75,81 @@ do
 	sudo perf stat ./mmluO3 200 200 >> outluO3perf.txt
 done
 
-gcc mmvectorized.c -o mmvectorizedO0 -O0
+
+gcc mmfission.c -o mmfissionO0 -O0
 for ((i=0;i<30;i++))
 do
-	./mmvectorizedO0 200 200 >> outvectorizedO0.txt
+	./mmfissionO0 200 200 >> outfissionO0.txt
 done
 for ((i=0;i<30;i++))
 do
-	sudo perf stat ./mmvectorizedO0 200 200 >> outvectorizedO0perf.txt
+	sudo perf stat ./mmfissionO0 200 200 >> outfissionO0perf.txt
 done
-gcc mmvectorized.c -o mmvectorizedO1 -O1
+gcc mmfission.c -o mmfissionO1 -O1
 for ((i=0;i<30;i++))
 do
-	./mmvectorizedO1 200 200 >> outvectorizedO1.txt
-done
-for ((i=0;i<30;i++))
-do
-	sudo perf stat ./mmvectorizedO1 200 200 >> outvectorizedO1perf.txt
-done
-gcc mmvectorized.c -o mmvectorizedO2 -O2
-for ((i=0;i<30;i++))
-do
-	./mmvectorizedO2 200 200 >> outvectorizedO2.txt
+	./mmfissionO1 200 200 >> outfissionO1.txt
 done
 for ((i=0;i<30;i++))
 do
-	sudo perf stat ./mmvectorizedO2 200 200 >> outvectorizedO2perf.txt
+	sudo perf stat ./mmfissionO1 200 200 >> outfissionO1perf.txt
 done
-gcc mmvectorized.c -o mmvectorizedO3 -O3
+gcc mmfission.c -o mmfissionO2 -O2
 for ((i=0;i<30;i++))
 do
-	./mmvectorizedO3 200 200 >> outvectorizedO3.txt
+	./mmfissionO2 200 200 >> outfissionO2.txt
 done
 for ((i=0;i<30;i++))
 do
-	sudo perf stat ./mmvectorizedO3 200 200 >> outvectorizedO3perf.txt
+	sudo perf stat ./mmfissionO2 200 200 >> outfissionO2perf.txt
+done
+gcc mmfission.c -o mmfissionO3 -O3
+for ((i=0;i<30;i++))
+do
+	./mmfissionO3 200 200 >> outfissionO3.txt
+done
+for ((i=0;i<30;i++))
+do
+	sudo perf stat ./mmfissionO3 200 200 >> outfissionO3perf.txt
 done
 
 
 
-gcc mmnest.c -o mmnestO0 -O0
+gcc mmtiling.c -o mmtilingO0 -O0
 for ((i=0;i<30;i++))
 do
-	./mmnestO0 200 200 >> outnestO0.txt
+	./mmtilingO0 200 200 >> outtilingO0.txt
 done
 for ((i=0;i<30;i++))
 do
-	sudo perf stat ./mmnestO0 200 200 >> outnestO0perf.txt
+	sudo perf stat ./mmtilingO0 200 200 >> outtilingO0perf.txt
 done
-gcc mmnest.c -o mmnestO1 -O1
+gcc mmtiling.c -o mmtilingO1 -O1
 for ((i=0;i<30;i++))
 do
-	./mmnestO1 200 200 >> outnestO1.txt
-done
-for ((i=0;i<30;i++))
-do
-	sudo perf stat ./mmnestO1 200 200 >> outnestO1perf.txt
-done
-gcc mmnest.c -o mmnestO2 -O2
-for ((i=0;i<30;i++))
-do
-	./mmnestO2 200 200 >> outnestO2.txt
+	./mmtilingO1 200 200 >> outtilingO1.txt
 done
 for ((i=0;i<30;i++))
 do
-	sudo perf stat ./mmnestO2 200 200 >> outnestO2perf.txt
+	sudo perf stat ./mmtilingO1 200 200 >> outtilingO1perf.txt
 done
-gcc mmnest.c -o mmnestO3 -O3
+gcc mmtiling.c -o mmtilingO2 -O2
 for ((i=0;i<30;i++))
 do
-	./mmnestO3 200 200 >> outnestO3.txt
+	./mmtilingO2 200 200 >> outtilingO2.txt
 done
 for ((i=0;i<30;i++))
 do
-	sudo perf stat ./mmnestO3 200 200 >> outnestO3perf.txt
+	sudo perf stat ./mmtilingO2 200 200 >> outtilingO2perf.txt
+done
+gcc mmtiling.c -o mmtilingO3 -O3
+for ((i=0;i<30;i++))
+do
+	./mmtilingO3 200 200 >> outtilingO3.txt
+done
+for ((i=0;i<30;i++))
+do
+	sudo perf stat ./mmtilingO3 200 200 >> outtilingO3perf.txt
 done
 
 
@@ -173,24 +174,24 @@ gcc average.c -o avg
 ./avg outluO2perf.txt > avgluperfO2.txt
 ./avg outluO3perf.txt > avgluperfO3.txt
 
-./avg outvectorizedO0.txt > avgVectO0.txt
-./avg outvectorizedO1.txt > avgVectO1.txt
-./avg outvectorizedO2.txt > avgVectO2.txt
-./avg outvectorizedO3.txt > avgVectO3.txt
+./avg outfissionO0.txt > avgFissionO0.txt
+./avg outfissionO1.txt > avgFissionO1.txt
+./avg outfissionO2.txt > avgFissionO2.txt
+./avg outfissionO3.txt > avgFissionO3.txt
 
-./avg outvectorizedO0perf.txt > avgVectperfO0.txt
-./avg outvectorizedO1perf.txt > avgVectperfO1.txt
-./avg outvectorizedO2perf.txt > avgVectperfO2.txt
-./avg outvectorizedO3perf.txt > avgVectperfO3.txt
+./avg outfissionO0perf.txt > avgFissionperfO0.txt
+./avg outfissionO1perf.txt > avgFissionperfO1.txt
+./avg outfissionO2perf.txt > avgFissionperfO2.txt
+./avg outfissionO3perf.txt > avgFissionperfO3.txt
 
-./avg outnestO0.txt > avgNestO0.txt
-./avg outnestO1.txt > avgNestO1.txt
-./avg outnestO2.txt > avgNestO2.txt
-./avg outnestO3.txt > avgNestO3.txt
+./avg outtilingO0.txt > avgtilingO0.txt
+./avg outtilingO1.txt > avgtilingO1.txt
+./avg outtilingO2.txt > avgtilingO2.txt
+./avg outtilingO3.txt > avgtilingO3.txt
 
-./avg outnestO0perf.txt > avgNestperfO0.txt
-./avg outnestO1perf.txt > avgNestperfO1.txt
-./avg outnestO2perf.txt > avgNestperfO2.txt
-./avg outnestO3perf.txt > avgNestperfO3.txt
+./avg outtilingO0perf.txt > avgtilingperfO0.txt
+./avg outtilingO1perf.txt > avgtilingperfO1.txt
+./avg outtilingO2perf.txt > avgtilingperfO2.txt
+./avg outtilingO3perf.txt > avgtilingperfO3.txt
 
-rm mmO0 mmluO0 mmO1 mmluO1 mmO2 mmluO2 mmO3 mmluO3 mmvectorizedO0 mmvectorizedO1  mmvectorizedO2  mmvectorizedO3 mmnestO0 mmnestO1 mmnestO2 mmnestO3 avg
+rm mmO0 mmluO0 mmO1 mmluO1 mmO2 mmluO2 mmO3 mmluO3 mmfissionO0 mmfissionO1  mmfissionO2  mmfissionO3 mmtilingO0 mmtilingO1 mmtilingO2 mmtilingO3 avg out*.txt
