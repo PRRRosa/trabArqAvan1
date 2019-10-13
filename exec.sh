@@ -114,6 +114,44 @@ done
 
 
 
+gcc mmnest.c -o mmnestO0 -O0
+for ((i=0;i<30;i++))
+do
+	./mmnestO0 200 200 >> outnestO0.txt
+done
+for ((i=0;i<30;i++))
+do
+	sudo perf stat ./mmnestO0 200 200 >> outnestO0perf.txt
+done
+gcc mmnest.c -o mmnestO1 -O1
+for ((i=0;i<30;i++))
+do
+	./mmnestO1 200 200 >> outnestO1.txt
+done
+for ((i=0;i<30;i++))
+do
+	sudo perf stat ./mmnestO1 200 200 >> outnestO1perf.txt
+done
+gcc mmnest.c -o mmnestO2 -O2
+for ((i=0;i<30;i++))
+do
+	./mmnestO2 200 200 >> outnestO2.txt
+done
+for ((i=0;i<30;i++))
+do
+	sudo perf stat ./mmnestO2 200 200 >> outnestO2perf.txt
+done
+gcc mmnest.c -o mmnestO3 -O3
+for ((i=0;i<30;i++))
+do
+	./mmnestO3 200 200 >> outnestO3.txt
+done
+for ((i=0;i<30;i++))
+do
+	sudo perf stat ./mmnestO3 200 200 >> outnestO3perf.txt
+done
+
+
 gcc average.c -o avg
 ./avg outoriginalO0.txt > avgOrigO0.txt
 ./avg outoriginalO1.txt > avgOrigO1.txt
@@ -145,4 +183,14 @@ gcc average.c -o avg
 ./avg outvectorizedO2perf.txt > avgVectperfO2.txt
 ./avg outvectorizedO3perf.txt > avgVectperfO3.txt
 
-rm mmO0 mmluO0 mmO1 mmluO1 mmO2 mmluO2 mmO3 mmluO3 mmvectorizedO0 mmvectorizedO1  mmvectorizedO2  mmvectorizedO3 avg
+./avg outnestO0.txt > avgNestO0.txt
+./avg outnestO1.txt > avgNestO1.txt
+./avg outnestO2.txt > avgNestO2.txt
+./avg outnestO3.txt > avgNestO3.txt
+
+./avg outnestO0perf.txt > avgNestperfO0.txt
+./avg outnestO1perf.txt > avgNestperfO1.txt
+./avg outnestO2perf.txt > avgNestperfO2.txt
+./avg outnestO3perf.txt > avgNestperfO3.txt
+
+rm mmO0 mmluO0 mmO1 mmluO1 mmO2 mmluO2 mmO3 mmluO3 mmvectorizedO0 mmvectorizedO1  mmvectorizedO2  mmvectorizedO3 mmnestO0 mmnestO1 mmnestO2 mmnestO3 avg

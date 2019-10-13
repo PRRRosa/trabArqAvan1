@@ -5,16 +5,28 @@
 //#define IMPRIME
 
 void multiplica(int m, int n, int **matA, int **matB, int **matC){
-	int i, j, k, som;
-	int ib = 24;
-	int kb = 64;
 
-	for(i=0;i<m;i+=ib){
-		for(j=0;j<n;j+kb){
-			for(k=;k<m;k++){
-				matC[i][j] += matA[i][k]*matB[k][j];
-			}
-		}
+	int i,ii,kk, j, k, som;
+	int acc00,acc01,acc10,acc11;
+
+	for (i = 0; i < m; i += 2)
+	{
+	    for (j = 0; j < n; j += 2)
+	    {
+	        acc00 = acc01 = acc10 = acc11 = 0;
+	        for (k = 0; k < m; k++)
+	        {
+	            acc00 += matB[k][j + 0] * matA[i + 0][k];
+	            acc01 += matB[k][j + 1] * matA[i + 0][k];
+	            acc10 += matB[k][j + 0] * matA[i + 1][k];
+	            acc11 += matB[k][j + 1] * matA[i + 1][k];
+	        }
+	        matC[i + 0][j + 0] = acc00;
+	        matC[i + 0][j + 1] = acc01;
+	        matC[i + 1][j + 0] = acc10;
+	        matC[i + 1][j + 1] = acc11;
+	    }
+
 	}
 
 }
