@@ -4,24 +4,33 @@
 #include <sys/time.h>
 //#define IMPRIME
 
-void multiplica(int m, int n, int *matA, int *matB, int *matC){
+void multiplica(int m, int n, int **matA, int **matB, int **matC){
 	int i, j, k, som;
 
 
-	for(i=0;i<m;i++){
-		for(j=0;j<n;j++){
-			for(k=0;k<m;k++){
-				matC[i*m+j] += matA[i*m+k]*matB[k*m+j];
+	for(i=0;i<m/2;i++){
+		for(j=0;j<n/2;j++){
+			for(k=0;k<m/2;k++){
+				matC[i][j] += matA[i][k]*matB[k][j];
+			}
+		}
+	}
+	for(i=m/2;i<m;i++){
+		for(j=n/2;j<n;j++){
+			for(k=m/2;k<m;k++){
+				matC[i][j] += matA[i][k]*matB[k][j];
 			}
 		}
 	}
 
 }
 
-int *aloca(int m, int n, int *matriz){
+int **aloca(int m, int n, int **matriz){
 	int i;
-	matriz=(int*)calloc(m*n, sizeof(int));
-
+	matriz=(int**)calloc(m, sizeof(int*));
+	for(i=0;i<m;i++){
+		matriz[i]=(int*)calloc(n, sizeof(int));
+	}
 	return matriz;
 }
 
@@ -38,34 +47,36 @@ double GetTime(void)
 }
 
 
-void imprime(int m, int n, int *matriz){
+void imprime(int m, int n, int **matriz){
 	int i, j;
 	for(i=0; i<m; i++){
 		for(j=0; j<n; j++){
-			printf("%d ", matriz[i+j]);
+			printf("%d ", matriz[i][j]);
 		}
 		printf("\n");
 	}
 }
 
-void inicializa(int m, int n, int *matriz){
+void inicializa(int m, int n, int **matriz){
 	int i, j;
 	for (i=0;i<m;i++){
 		for(j=0;j<n;j++){
-			matriz[i+j]=i+j;
+			matriz[i][j]=i+j;
 		}
 	}
 }
 
 
-void desaloca(int m, int n, int *matriz){
+void desaloca(int m, int n, int **matriz){
 	int i;
-
+	for(i=0;i<m;i++){
+		free(matriz[i]);
+	}
 	free(matriz);
 }
 
 int main (int argc, char *argv[]) {
-	int *matA,*matB,*matC;
+	int **matA,**matB,**matC;
 	int m,n,i,j,k; // m(linhas) e n (colunas)
 	double clockBegin;
 	double timeElapsed;
@@ -113,7 +124,7 @@ int main (int argc, char *argv[]) {
 	imprime(m, n, matC);
 	printf("\n");
 	#endif
-  
+
 	printf("%5lf\n", timeElapsed);
 
 	/*DESALOCA AS MATRIZES*/
